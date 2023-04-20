@@ -1,5 +1,26 @@
 import streamlit as st
 import math
+import base64
+
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def set_png_as_page_bg(png_file):
+    bin_str = get_base64_of_bin_file(png_file)
+    page_bg_img = '''
+    <style>
+    body {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+    
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+    return
 
 def gptb2(a, b, c):
     if a == 0:
@@ -27,6 +48,7 @@ def clear_input():
     st.session_state["nhap_c"] = 0.0
 
 st.subheader('Giải phương trình bậc 2')
+set_png_as_page_bg('gorou.png')
 with st.form(key='columns_in_form', clear_on_submit = False):
     a = st.number_input('Nhập a', key = 'nhap_a')
     b = st.number_input('Nhập b', key = 'nhap_b')
