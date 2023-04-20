@@ -39,9 +39,8 @@ def set_background(png_file):
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-
 with st.form(key='columns_in_form', clear_on_submit = False):
-    set_background("gorou.jpg")
+    set_background('gorou.jpg')
     a = st.number_input('Nhập a', key = 'nhap_a')
     b = st.number_input('Nhập b', key = 'nhap_b')
     c = st.number_input('Nhập c', key = 'nhap_c')
