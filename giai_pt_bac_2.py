@@ -27,18 +27,21 @@ def clear_input():
     st.session_state["nhap_c"] = 0.0
 
 st.subheader('Giải phương trình bậc 2')
-page_bg_img = '''
-<style>
-body {
-background-image: url("https://scontent.fsgn10-1.fna.fbcdn.net/v/t39.30808-6/280867409_1169621930516814_1805404599567449876_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=730e14&_nc_ohc=CQxIpyibgLcAX_dVydB&_nc_ht=scontent.fsgn10-1.fna&oh=00_AfCDLzJozlcLBYToLeVr7DosRtpnnkv1G_yniSyoax7BMQ&oe=64468187");
-background-size: cover;
-}
-</style>
-'''
+def set_background(png_file):
+    bin_str = get_base64(png_file)
+    page_bg_img = '''
+    <style>
+    .stApp {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+    st.markdown(page_bg_img, unsafe_allow_html=True)
 
 
 with st.form(key='columns_in_form', clear_on_submit = False):
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+    set_background("gorou.jpg")
     a = st.number_input('Nhập a', key = 'nhap_a')
     b = st.number_input('Nhập b', key = 'nhap_b')
     c = st.number_input('Nhập c', key = 'nhap_c')
